@@ -2,6 +2,7 @@ import { Button, Card, Table } from "react-bootstrap";
 import AddWork from "./AddWork";
 import React, { useState } from "react";
 import Work from './Work';
+import Filter from "./Filter";
 
 function Works(props) {
     const [addWork, setAddWork] = useState(false);
@@ -23,10 +24,18 @@ function Works(props) {
         props.status(true);
     }
 
+    const handleFilter = (search) => {
+        console.log(search)
+    }
+
+
     return (
         <>
             {addWork && <AddWork setWorks={handleAddWork} />}
             <Card>
+                <Card.Header>
+                    <Filter filterCriteria={handleFilter} />
+                </Card.Header>
                 <Card.Header>
                     {addWork ? (
                         <Button className="btn btn-danger" onClick={closeWorkHandler}>
@@ -38,6 +47,7 @@ function Works(props) {
                         </Button>
                     )}
                 </Card.Header>
+
                 <Card.Header>
                     <h3>Darbų sąrašas</h3>
                 </Card.Header>
@@ -49,6 +59,8 @@ function Works(props) {
                                 <th>Klientas</th>
                                 <th>Suteikta paslauga</th>
                                 <th>Aprašymas</th>
+                                <th>Pradėta</th>
+                                <th>Baigta</th>
                                 <th>Trukmė</th>
                             </tr>
                         </thead>
