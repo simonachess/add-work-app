@@ -13,7 +13,6 @@ function Filter(props) {
             [e.target.name]: e.target.value
         })
     }
-    console.log(filter)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,7 +29,7 @@ function Filter(props) {
                             name="company"
                             aria-label="Floating label select example"
                             onChange={handleFilter}>
-                            <option selected disabled>....</option>
+                            <option>....</option>
                             <Companies />
                         </Form.Select>
                     </FloatingLabel>
@@ -40,7 +39,7 @@ function Filter(props) {
                             name="service"
                             aria-label="Floating label select example"
                             onChange={handleFilter}>
-                            <option selected disabled>....</option>
+                            <option>....</option>
                             <Services />
                         </Form.Select>
                     </FloatingLabel>

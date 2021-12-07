@@ -11,8 +11,12 @@ function Work(props) {
         let hours = Math.floor(diff / 1000 / 60 / 60);
         diff -= hours * 1000 * 60 * 60;
         const minutes = Math.floor(diff / 1000 / 60);
-        console.log(startDate)
         return (hours < 9 ? "0" : "") + hours + ":" + (minutes < 9 ? "0" : "") + minutes;
+    }
+
+    const getIDhandler = () => {
+        console.log(props.id)
+        props.delete(props.id)
     }
 
     return (
@@ -24,6 +28,8 @@ function Work(props) {
             <td>{props.startTime}</td>
             <td>{props.endTime}</td>
             <td>{diff(props.startTime, props.endTime)}</td>
+            <td><a href="#/" onClick={getIDhandler}>Delete</a></td>
+            <td><a href="#/">Edit</a></td>
         </tr>
     )
 }

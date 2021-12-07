@@ -1,12 +1,15 @@
-import { Button, Card, Table } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import AddWork from "./AddWork";
-import React, { useState } from "react";
-import Work from './Work';
+import React, { useEffect, useState } from "react";
 import Filter from "./Filter";
+import WorksTable from "./WorksTable";
+import * as services from '../services'
 
 function Works(props) {
     const [addWork, setAddWork] = useState(false);
     const [works, setWorks] = useState([]);
+    const [filterResults, setFilterResults] = useState([]);
+
 
     function addWorkHandler() {
         setAddWork(true);
@@ -17,17 +20,27 @@ function Works(props) {
     }
 
     const handleAddWork = (data) => {
-        setWorks([
-            ...works, data
-        ]);
+        services.addWork(data)
         closeWorkHandler();
         props.status(true);
     }
 
-    const handleFilter = (search) => {
-        console.log(search)
+    const handleFilter = (criteria) => {
+
+        const filteredItems = works.filter(item => {
+            return Object.keys(criteria).every(filter => {
+                return criteria[filter] === item[filter]
+            });
+
+        });
+        // console.log(filteredItems)
+        setFilterResults(filteredItems);
     }
 
+
+    useEffect(() => {
+        services.getAllWorks(works => setWorks(works));
+    }, [])
 
     return (
         <>
@@ -47,37 +60,11 @@ function Works(props) {
                         </Button>
                     )}
                 </Card.Header>
-
                 <Card.Header>
                     <h3>Darbų sąrašas</h3>
                 </Card.Header>
                 <Card.Body>
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr>
-                                <th>Data</th>
-                                <th>Klientas</th>
-                                <th>Suteikta paslauga</th>
-                                <th>Aprašymas</th>
-                                <th>Pradėta</th>
-                                <th>Baigta</th>
-                                <th>Trukmė</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {works.map((work, index) => {
-                                return (
-                                    <Work
-                                        key={index}
-                                        date={work.date}
-                                        company={work.company}
-                                        service={work.service}
-                                        description={work.description}
-                                        startTime={work.startTime}
-                                        endTime={work.endTime} />)
-                            })}
-                        </tbody>
-                    </Table>
+                    <WorksTable data={filterResults.length ? filterResults : works} />
                 </Card.Body>
             </Card>
         </>
