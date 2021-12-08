@@ -1,5 +1,5 @@
 import { Card, Form, FloatingLabel, Button } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Services from "./Services";
 import Companies from "./Companies";
 
@@ -14,16 +14,24 @@ function Filter(props) {
         })
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        props.filterCriteria(filter)
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     props.filterCriteria(filter)
+    // }
+
+    const resetFilter = () => {
+        setFilter({})
     }
+
+    useEffect(() => {
+        props.filterCriteria(filter)
+    }, [filter])
 
     return (
         <Card>
             <Card.Header>Add work</Card.Header>
             <Card.Body>
-                <Form onSubmit={handleSubmit}>
+                <Form>
                     <FloatingLabel className="mb-3" label="Choose enterprise">
                         <Form.Select
                             name="company"
@@ -43,9 +51,14 @@ function Filter(props) {
                             <Services />
                         </Form.Select>
                     </FloatingLabel>
-                    <Button variant="primary" type="submit">
+                    {
+                        (Object.keys(filter).length !== 0) &&
+                        <Button variant="primary" type="reset" onClick={resetFilter}>Reset</Button>
+                    }
+
+                    {/* <Button variant="primary" type="submit">
                         Filter
-                    </Button>
+                    </Button> */}
                 </Form>
             </Card.Body>
         </Card>

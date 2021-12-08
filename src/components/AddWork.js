@@ -20,7 +20,7 @@ function AddWork(props) {
 
     useEffect(() => {
         props.update && services.showById(item => setItems(item), props.update)
-    }, [])
+    }, [props.update])
 
     const handleChange = (e) => {
         setItems({
@@ -96,7 +96,11 @@ function AddWork(props) {
                             onChange={handleChange} />
                     </Form.Group>
                     {(props.update) ?
-                        <Button variant="primary" type="button" onClick={updateHandler}>Update</Button> :
+                        <>
+                            <Button variant="primary" type="button" onClick={updateHandler}>Update</Button>
+                            <Button variant="primary" type="button" onClick={props.closeWorkHandler}>Cancel</Button>
+                        </>
+                        :
                         <Button variant="primary" type="submit">Save</Button>
                     }
                 </Form>

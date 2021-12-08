@@ -57,11 +57,9 @@ function Works(props) {
 
     return (
         <>
-            {(addWork || workId) && <AddWork setWorks={handleAddWork} update={workId} onUpdateWorkHandler={onUpdateWorkHandler} />}
+            {(addWork || workId) && <AddWork setWorks={handleAddWork} update={workId} onUpdateWorkHandler={onUpdateWorkHandler} closeWorkHandler={closeWorkHandler} />}
             <Card>
-                <Card.Header>
-                    <Filter filterCriteria={handleFilter} />
-                </Card.Header>
+
                 <Card.Header>
                     {addWork ? (
                         <Button className="btn btn-danger" onClick={closeWorkHandler}>
@@ -72,6 +70,9 @@ function Works(props) {
                             Pridėti
                         </Button>
                     )}
+                </Card.Header>
+                <Card.Header>
+                    <Filter filterCriteria={handleFilter} />
                 </Card.Header>
                 <Card.Header>
                     <h3>Darbų sąrašas</h3>
