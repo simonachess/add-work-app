@@ -1,14 +1,22 @@
 import { Button, Card } from "react-bootstrap";
 import AddWork from "./AddWork";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Filter from "./Filter";
 import WorksTable from "./WorksTable";
-import * as services from '../services'
+import * as services from '../services';
+
+export const WorkContext = React.createContext({})
 
 function Works(props) {
     const [addWork, setAddWork] = useState(false);
     const [works, setWorks] = useState([]);
     const [filterResults, setFilterResults] = useState([]);
+    const [workId, setWorkId] = useState('');
+    const value = useMemo(() => (
+        {
+            workId, setWorkId
+        }
+    ), [workId])
 
 
     function addWorkHandler() {
@@ -24,14 +32,17 @@ function Works(props) {
         closeWorkHandler();
         props.status(true);
     }
+    //apkeist
+    const onUpdateWorkHandler = (id, data) => {
+        services.updateWork(id, data)
+        setWorkId('')
+    }
 
     const handleFilter = (criteria) => {
-
         const filteredItems = works.filter(item => {
             return Object.keys(criteria).every(filter => {
                 return criteria[filter] === item[filter]
             });
-
         });
         // console.log(filteredItems)
         setFilterResults(filteredItems);
@@ -42,9 +53,11 @@ function Works(props) {
         services.getAllWorks(works => setWorks(works));
     }, [])
 
+    console.log(workId)
+
     return (
         <>
-            {addWork && <AddWork setWorks={handleAddWork} />}
+            {(addWork || workId) && <AddWork setWorks={handleAddWork} update={workId} onUpdateWorkHandler={onUpdateWorkHandler} />}
             <Card>
                 <Card.Header>
                     <Filter filterCriteria={handleFilter} />
@@ -64,7 +77,9 @@ function Works(props) {
                     <h3>Darbų sąrašas</h3>
                 </Card.Header>
                 <Card.Body>
-                    <WorksTable data={filterResults.length ? filterResults : works} />
+                    <WorkContext.Provider value={value}>
+                        <WorksTable data={filterResults.length ? filterResults : works} />
+                    </WorkContext.Provider>
                 </Card.Body>
             </Card>
         </>

@@ -21,8 +21,13 @@ export const addWork = (data) => {
 
 }
 
-export const showById = () => {
-
+export const showById = (item, id) => {
+    firebase
+        .firestore()
+        .collection('timetable')
+        .doc(id)
+        .get()
+        .then((docRef) => { item(docRef.data()) })
 
 }
 
@@ -35,7 +40,11 @@ export const deleteWork = (id) => {
 }
 
 
-export const updateWork = () => {
-
+export const updateWork = (id, data) => {
+    firebase
+        .firestore()
+        .collection('timetable')
+        .doc(id)
+        .set(data)
 }
 

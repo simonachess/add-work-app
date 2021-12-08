@@ -1,6 +1,9 @@
-
+import React, { useContext } from "react";
+import { WorkContext } from "./Works";
 
 function Work(props) {
+
+    const { workId, setWorkId } = useContext(WorkContext)
 
     const diff = (start, end) => {
         start = start.split(":");
@@ -19,6 +22,10 @@ function Work(props) {
         props.delete(props.id)
     }
 
+    const getIdUpdateHandler = () => {
+        setWorkId(props.id)
+    }
+
     return (
         <tr>
             <td>{props.date}</td>
@@ -29,7 +36,7 @@ function Work(props) {
             <td>{props.endTime}</td>
             <td>{diff(props.startTime, props.endTime)}</td>
             <td><a href="#/" onClick={getIDhandler}>Delete</a></td>
-            <td><a href="#/">Edit</a></td>
+            <td><a href="#/" onClick={getIdUpdateHandler}>Edit</a></td>
         </tr>
     )
 }

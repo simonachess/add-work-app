@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { FloatingLabel } from "react-bootstrap";
 import Companies from "./Companies";
 import Services from "./Services";
-
+import * as services from '../services'
 
 function AddWork(props) {
 
@@ -17,6 +17,11 @@ function AddWork(props) {
         endTime: ''
     })
 
+
+    useEffect(() => {
+        props.update && services.showById(item => setItems(item), props.update)
+    }, [])
+
     const handleChange = (e) => {
         setItems({
             ...items,
@@ -27,6 +32,10 @@ function AddWork(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         props.setWorks(items);
+    }
+
+    const updateHandler = () => {
+        props.onUpdateWorkHandler(props.update, items)
     }
 
     return (
@@ -86,10 +95,10 @@ function AddWork(props) {
                             value={items.endTime}
                             onChange={handleChange} />
                     </Form.Group>
-
-                    <Button variant="primary" type="submit">
-                        Save
-                    </Button>
+                    {(props.update) ?
+                        <Button variant="primary" type="button" onClick={updateHandler}>Update</Button> :
+                        <Button variant="primary" type="submit">Save</Button>
+                    }
                 </Form>
             </Card.Body>
         </Card>
