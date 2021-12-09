@@ -1,9 +1,29 @@
 import firebase from "./firebase";
 
-export const getAllWorks = (onWorkChanged) => {
+const SORT_OPTIONS = {
+    "COMPANY_ASC": {
+        column: 'company',
+        direction: 'asc'
+    },
+    "COMPANY_DESC": {
+        column: 'company',
+        direction: 'desc'
+    },
+    "SERVICE_ASC": {
+        column: 'service',
+        direction: 'asc'
+    },
+    "SERVICE_DESC": {
+        column: 'service',
+        direction: 'desc'
+    },
+}
+
+export const getAllWorks = (onWorkChanged, sortBy) => {
     firebase
         .firestore()
         .collection('timetable')
+        .orderBy(SORT_OPTIONS[sortBy].column, SORT_OPTIONS[sortBy].direction)
         .onSnapshot((snapshot) => {
             const newWork = snapshot.docs.map(doc => ({
                 id: doc.id,

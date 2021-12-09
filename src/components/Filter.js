@@ -23,34 +23,40 @@ function Filter(props) {
         setFilter({})
     }
 
+
+
+
     useEffect(() => {
         props.filterCriteria(filter)
     }, [filter])
 
     return (
         <Card>
-            <Card.Header>Add work</Card.Header>
+            <Card.Header>Filter</Card.Header>
             <Card.Body>
                 <Form>
-                    <FloatingLabel className="mb-3" label="Choose enterprise">
+                    <Form.Group className="mb-3">
+                        <FloatingLabel label="Choose enterprise"></FloatingLabel>
                         <Form.Select
                             name="company"
                             aria-label="Floating label select example"
+                            style={{ width: "100%" }}
                             onChange={handleFilter}>
                             <option>....</option>
                             <Companies />
                         </Form.Select>
-                    </FloatingLabel>
-
-                    <FloatingLabel className="mb-3" label="Choose service">
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <FloatingLabel label="Choose service"> </FloatingLabel>
                         <Form.Select
                             name="service"
                             aria-label="Floating label select example"
+                            style={{ width: "100%" }}
                             onChange={handleFilter}>
                             <option>....</option>
                             <Services />
                         </Form.Select>
-                    </FloatingLabel>
+                    </Form.Group>
                     {
                         (Object.keys(filter).length !== 0) &&
                         <Button variant="primary" type="reset" onClick={resetFilter}>Reset</Button>

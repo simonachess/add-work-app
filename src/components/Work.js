@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { WorkContext } from "./Works";
+import { Link } from 'react-router-dom'
 
 function Work(props) {
 
@@ -31,12 +32,12 @@ function Work(props) {
             <td>{props.date}</td>
             <td>{props.company}</td>
             <td>{props.service}</td>
-            <td>{props.description}</td>
             <td>{props.startTime}</td>
             <td>{props.endTime}</td>
             <td>{diff(props.startTime, props.endTime)}</td>
             <td><a href="#/" onClick={getIDhandler}>Delete</a></td>
             <td><a href="#/" onClick={getIdUpdateHandler}>Edit</a></td>
+            <td><Link key={props.id} to={`work/${props.id}`}>More...</Link></td>
         </tr>
     )
 }

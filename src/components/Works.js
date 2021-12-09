@@ -12,6 +12,8 @@ function Works(props) {
     const [works, setWorks] = useState([]);
     const [filterResults, setFilterResults] = useState([]);
     const [workId, setWorkId] = useState('');
+    const [sortBy, setSortBy] = useState('COMPANY_DESC');
+    // const [sortServiceBy, setSortServicetBy] = useState('SERVICE_DESC');
     const value = useMemo(() => (
         {
             workId, setWorkId
@@ -49,25 +51,43 @@ function Works(props) {
     }
 
 
-    useEffect(() => {
-        services.getAllWorks(works => setWorks(works));
-    }, [])
+    //perdirbti prachekinant prevState
+    const handleSortCompany = () => {
+        if (sortBy === 'COMPANY_ASC') {
+            setSortBy('COMPANY_DESC');
+        }
+        else {
+            setSortBy('COMPANY_ASC');
+        }
+    }
 
-    console.log(workId)
+    const handleSortService = () => {
+        if (sortBy === 'COMPANY_ASC') {
+            setSortBy('COMPANY_DESC');
+        }
+        else {
+            setSortBy('COMPANY_ASC');
+        }
+    }
+
+
+    useEffect(() => {
+        services.getAllWorks(works => setWorks(works), sortBy);
+    }, [sortBy])
 
     return (
         <>
-            {(addWork || workId) && <AddWork setWorks={handleAddWork} update={workId} onUpdateWorkHandler={onUpdateWorkHandler} closeWorkHandler={closeWorkHandler} />}
+            {(addWork || workId) && <AddWork setWorks={handleAddWork} update={workId} onUpdateWorkHandler={onUpdateWorkHandler} />}
             <Card>
 
                 <Card.Header>
                     {addWork ? (
                         <Button className="btn btn-danger" onClick={closeWorkHandler}>
-                            Atšaukti
+                            Cancel
                         </Button>
                     ) : (
                         <Button className="btn btn-primary" onClick={addWorkHandler}>
-                            Pridėti
+                            Add
                         </Button>
                     )}
                 </Card.Header>
@@ -75,11 +95,11 @@ function Works(props) {
                     <Filter filterCriteria={handleFilter} />
                 </Card.Header>
                 <Card.Header>
-                    <h3>Darbų sąrašas</h3>
+                    <h3>List of works</h3>
                 </Card.Header>
                 <Card.Body>
                     <WorkContext.Provider value={value}>
-                        <WorksTable data={filterResults.length ? filterResults : works} />
+                        <WorksTable handleSortCompany={handleSortCompany} handleSortService={handleSortService} data={filterResults.length ? filterResults : works} />
                     </WorkContext.Provider>
                 </Card.Body>
             </Card>

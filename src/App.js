@@ -1,9 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 import Works from './components/Works';
+import WorkById from './components/WorkById';
 import Header from './components/Header';
 import { Alert } from "react-bootstrap";
+
 
 function App() {
 
@@ -24,10 +27,15 @@ function App() {
 
   return (
     <div className="container">
-      <Header />
-      {(message) ? <Alert variant="success">
-        {message}</Alert> : ''}
-      <Works status={setMessageHandler} />
+      <Router>
+        <Header />
+        {(message) ? <Alert variant="success">
+          {message}</Alert> : ''}
+        <Routes>
+          <Route path="/" element={<Works status={setMessageHandler} />} />
+          <Route path="work/:id" element={<WorkById />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

@@ -50,46 +50,46 @@ function AddWork(props) {
                             name="date"
                             onChange={handleChange} />
                     </Form.Group>
-
-                    <FloatingLabel className="mb-3" label="Choose enterprise">
+                    <Form.Group className="mb-3">
+                        <FloatingLabel label="Choose enterprise"></FloatingLabel>
                         <Form.Select value={items.company}
                             name="company"
                             aria-label="Floating label select example"
+                            style={{ width: "100%" }}
                             onChange={handleChange}>
                             <option>....</option>
                             <Companies />
                         </Form.Select>
-                    </FloatingLabel>
-
-                    <FloatingLabel className="mb-3" label="Choose service">
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <FloatingLabel label="Choose service"></FloatingLabel>
                         <Form.Select value={items.service}
                             name="service"
                             aria-label="Floating label select example"
+                            style={{ width: "100%" }}
                             onChange={handleChange}>
                             <option>....</option>
                             <Services />
                         </Form.Select>
-                    </FloatingLabel>
-
-                    <FloatingLabel label="Atlikto darbo aprašymas">
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <FloatingLabel label="Description"></FloatingLabel>
                         <Form.Control value={items.description}
                             name="description"
                             as="textarea"
                             placeholder="Leave a comment here"
                             onChange={handleChange}
                             style={{ height: "100px" }} />
-                    </FloatingLabel>
-
+                    </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Nuo:</Form.Label>
+                        <Form.Label>From:</Form.Label>
                         <Form.Control type="time"
                             name="startTime"
                             value={items.startTime}
                             onChange={handleChange} />
                     </Form.Group>
-
                     <Form.Group className="mb-3">
-                        <Form.Label>Iki:</Form.Label>
+                        <Form.Label>To:</Form.Label>
                         <Form.Control type="time"
                             name="endTime"
                             value={items.endTime}
@@ -98,14 +98,14 @@ function AddWork(props) {
                     {(props.update) ?
                         <>
                             <Button variant="primary" type="button" onClick={updateHandler}>Update</Button>
-                            <Button variant="primary" type="button" onClick={props.closeWorkHandler}>Cancel</Button>
+                            {/* <Button variant="primary" type="button" onClick={props.setWorkId('')}>Cancel</Button> */}
                         </>
                         :
                         <Button variant="primary" type="submit">Save</Button>
                     }
                 </Form>
             </Card.Body>
-        </Card>
+        </Card >
     );
 }
 
