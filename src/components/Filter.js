@@ -14,17 +14,9 @@ function Filter(props) {
         })
     }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     props.filterCriteria(filter)
-    // }
-
     const resetFilter = () => {
         setFilter({})
     }
-
-
-
 
     useEffect(() => {
         props.filterCriteria(filter)

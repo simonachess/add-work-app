@@ -1,15 +1,21 @@
 import { Button, Card } from "react-bootstrap";
 import AddWork from "./AddWork";
-import React, { useEffect, useState, useMemo } from "react";
+import CompaniesList from "./CompaniesList";
+import AddCompany from "./AddCompany";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import Filter from "./Filter";
 import WorksTable from "./WorksTable";
 import * as services from '../services';
+import * as servicesCompany from '../servicesCompany';
 
 export const WorkContext = React.createContext({})
 
 function Works(props) {
     const [addWork, setAddWork] = useState(false);
+    const [addCompany, setAddCompany] = useState(false);
     const [works, setWorks] = useState([]);
+    const [companies, setCompanies] = useState([]);
+    const [companiesList, setCompaniesList] = useState(false);
     const [filterResults, setFilterResults] = useState([]);
     const [workId, setWorkId] = useState('');
     const [sortBy, setSortBy] = useState('COMPANY_DESC');
@@ -34,6 +40,26 @@ function Works(props) {
         closeWorkHandler();
         props.status(true);
     }
+    const addCompanyHandler = () => {
+        setAddCompany(true);
+    }
+    const closeAddCompanyForm = () => {
+        setAddCompany(false);
+    }
+
+    const handleAddCompany = (comanpies) => {
+        servicesCompany.addCompany(comanpies)
+        closeAddCompanyForm();
+        props.status(true);
+    }
+
+    const showCompaniesList = () => {
+        setCompaniesList(true);
+    }
+    const closeCompaniesList = () => {
+        setCompaniesList(false);
+    }
+
     //apkeist
     const onUpdateWorkHandler = (id, data) => {
         services.updateWork(id, data)
@@ -46,12 +72,9 @@ function Works(props) {
                 return criteria[filter] === item[filter]
             });
         });
-        // console.log(filteredItems)
         setFilterResults(filteredItems);
     }
 
-
-    //perdirbti prachekinant prevState
     const handleSortCompany = () => {
         if (sortBy === 'COMPANY_ASC') {
             setSortBy('COMPANY_DESC');
@@ -70,16 +93,20 @@ function Works(props) {
         }
     }
 
-
     useEffect(() => {
         services.getAllWorks(works => setWorks(works), sortBy);
+        console.log('works', works)
     }, [sortBy])
+
+    useEffect(() => {
+        servicesCompany.getAllCompanies(companies => setCompanies(companies));
+        console.log('companies', companies)
+    }, [])
 
     return (
         <>
             {(addWork || workId) && <AddWork setWorks={handleAddWork} update={workId} onUpdateWorkHandler={onUpdateWorkHandler} />}
             <Card>
-
                 <Card.Header>
                     {addWork ? (
                         <Button className="btn btn-danger" onClick={closeWorkHandler}>
@@ -91,8 +118,39 @@ function Works(props) {
                         </Button>
                     )}
                 </Card.Header>
+
+
                 <Card.Header>
                     <Filter filterCriteria={handleFilter} />
+                </Card.Header>
+
+                <Card.Header>
+                    {addCompany ? (
+                        <Button className="btn btn-danger" onClick={closeAddCompanyForm}>
+                            Cancel
+                        </Button>
+                    ) : (
+                        <Button className="btn btn-primary" onClick={addCompanyHandler}>
+                            Add Company
+                        </Button>
+                    )}
+                    <Card.Body>
+                        {addCompany ? <AddCompany setCompany={handleAddCompany} /> : null}
+                    </Card.Body>
+                </Card.Header>
+                <Card.Header>
+                    {companiesList ? (
+                        <Button className="btn btn-danger" onClick={closeCompaniesList}>
+                            Close list
+                        </Button>
+                    ) : (
+                        <Button className="btn btn-primary" onClick={showCompaniesList}>
+                            List of companies
+                        </Button>
+                    )}
+                    <Card.Body>
+                        {companiesList ? <CompaniesList companies={companies} /> : null}
+                    </Card.Body>
                 </Card.Header>
                 <Card.Header>
                     <h3>List of works</h3>
@@ -102,6 +160,7 @@ function Works(props) {
                         <WorksTable handleSortCompany={handleSortCompany} handleSortService={handleSortService} data={filterResults.length ? filterResults : works} />
                     </WorkContext.Provider>
                 </Card.Body>
+
             </Card>
         </>
     );

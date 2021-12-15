@@ -38,7 +38,6 @@ export const addWork = (data) => {
         .firestore()
         .collection('timetable')
         .add(data)
-
 }
 
 export const showById = (item, id) => {
