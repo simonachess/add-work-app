@@ -18,7 +18,6 @@ function AddWork(props) {
         endTime: ''
     })
 
-
     useEffect(() => {
         props.update && services.showById(item => setItems(item), props.update)
     }, [props.update])
@@ -38,7 +37,7 @@ function AddWork(props) {
     const updateHandler = () => {
         props.onUpdateWorkHandler(props.update, items)
     }
-
+    console.log('AddWork failas', props.companies)
     return (
         <Card>
             <Card.Header>Add work</Card.Header>
@@ -59,7 +58,7 @@ function AddWork(props) {
                             style={{ width: "100%" }}
                             onChange={handleChange}>
                             <option>....</option>
-                            <Companies />
+                            <Companies companies={props.companies} />
                         </Form.Select>
                     </Form.Group>
                     <Form.Group className="mb-3">

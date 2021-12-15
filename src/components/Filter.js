@@ -25,9 +25,9 @@ function Filter(props) {
     return (
         <Card>
             <Card.Header>Filter</Card.Header>
-            <Card.Body>
-                <Form>
-                    <Form.Group className="mb-3">
+            <Form className="d-flex flex-direction-row">
+                <Card.Body>
+                    <Form.Group>
                         <FloatingLabel label="Choose enterprise"></FloatingLabel>
                         <Form.Select
                             name="company"
@@ -35,10 +35,12 @@ function Filter(props) {
                             style={{ width: "100%" }}
                             onChange={handleFilter}>
                             <option>....</option>
-                            <Companies />
+                            <Companies companies={props.companies} />
                         </Form.Select>
                     </Form.Group>
-                    <Form.Group className="mb-3">
+                </Card.Body>
+                <Card.Body>
+                    <Form.Group >
                         <FloatingLabel label="Choose service"> </FloatingLabel>
                         <Form.Select
                             name="service"
@@ -57,8 +59,9 @@ function Filter(props) {
                     {/* <Button variant="primary" type="submit">
                         Filter
                     </Button> */}
-                </Form>
-            </Card.Body>
+                </Card.Body>
+            </Form>
+
         </Card>
     );
 }

@@ -11,16 +11,16 @@ function WorksTable(props) {
     return (
         <Table striped bordered hover>
             <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Client<Button variant="secondary" className="m-1" onClick={props.handleSortCompany}>Sort ↑ ↓</Button></th>
-                    <th>Service<Button variant="secondary" className="m-1" onClick={props.handleSortService}>Sort ↑ ↓ </Button></th>
-                    <th>Started</th>
-                    <th>Ended</th>
-                    <th>Duration</th>
-                    <th>Delete</th>
-                    <th>Edit</th>
-                    <th>Plačiau</th>
+                <tr >
+                    <th className="align-middle">Date</th>
+                    <th className="align-middle">Client<Button variant="light" className="ml-2" onClick={props.handleSortCompany}>Sort ↑ ↓</Button></th>
+                    <th className="align-middle">Service<Button variant="light" className="ml-2" onClick={props.handleSortService}>Sort ↑ ↓ </Button></th>
+                    <th className="align-middle">Started</th>
+                    <th className="align-middle">Ended</th>
+                    <th className="align-middle">Duration</th>
+                    <th className="align-middle">Delete</th>
+                    <th className="align-middle">Edit</th>
+                    <th className="align-middle">Plačiau</th>
                 </tr>
             </thead>
             <tbody>

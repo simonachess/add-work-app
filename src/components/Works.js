@@ -2,7 +2,7 @@ import { Button, Card } from "react-bootstrap";
 import AddWork from "./AddWork";
 import CompaniesList from "./CompaniesList";
 import AddCompany from "./AddCompany";
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Filter from "./Filter";
 import WorksTable from "./WorksTable";
 import * as services from '../services';
@@ -95,36 +95,25 @@ function Works(props) {
 
     useEffect(() => {
         services.getAllWorks(works => setWorks(works), sortBy);
-        console.log('works', works)
     }, [sortBy])
 
     useEffect(() => {
         servicesCompany.getAllCompanies(companies => setCompanies(companies));
-        console.log('companies', companies)
     }, [])
 
     return (
         <>
-            {(addWork || workId) && <AddWork setWorks={handleAddWork} update={workId} onUpdateWorkHandler={onUpdateWorkHandler} />}
             <Card>
-                <Card.Header>
+                <Card.Header className="d-flex justify-content-between">
                     {addWork ? (
                         <Button className="btn btn-danger" onClick={closeWorkHandler}>
                             Cancel
                         </Button>
                     ) : (
                         <Button className="btn btn-primary" onClick={addWorkHandler}>
-                            Add
+                            Add Work
                         </Button>
                     )}
-                </Card.Header>
-
-
-                <Card.Header>
-                    <Filter filterCriteria={handleFilter} />
-                </Card.Header>
-
-                <Card.Header>
                     {addCompany ? (
                         <Button className="btn btn-danger" onClick={closeAddCompanyForm}>
                             Cancel
@@ -134,24 +123,22 @@ function Works(props) {
                             Add Company
                         </Button>
                     )}
-                    <Card.Body>
-                        {addCompany ? <AddCompany setCompany={handleAddCompany} /> : null}
-                    </Card.Body>
-                </Card.Header>
-                <Card.Header>
                     {companiesList ? (
                         <Button className="btn btn-danger" onClick={closeCompaniesList}>
                             Close list
                         </Button>
                     ) : (
                         <Button className="btn btn-primary" onClick={showCompaniesList}>
-                            List of companies
+                            Companies list
                         </Button>
-                    )}
-                    <Card.Body>
-                        {companiesList ? <CompaniesList companies={companies} /> : null}
-                    </Card.Body>
+                    )} </Card.Header>
+                {companiesList && <Card.Body> <CompaniesList companies={companies} /></Card.Body>}
+                {addCompany && <Card.Body className="d-flex justify-content-center">  <AddCompany setCompany={handleAddCompany} /></Card.Body>}
+                {(addWork || workId) && <Card.Body className="w-50">  <AddWork companies={companies} setWorks={handleAddWork} update={workId} onUpdateWorkHandler={onUpdateWorkHandler} /></Card.Body>}
+                <Card.Header>
+                    <Filter filterCriteria={handleFilter} companies={companies} />
                 </Card.Header>
+
                 <Card.Header>
                     <h3>List of works</h3>
                 </Card.Header>
