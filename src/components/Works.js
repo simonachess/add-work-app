@@ -5,8 +5,11 @@ import AddCompany from "./AddCompany";
 import React, { useEffect, useState, useMemo } from "react";
 import Filter from "./Filter";
 import WorksTable from "./WorksTable";
-import * as services from '../services';
-import * as servicesCompany from '../servicesCompany';
+import { auth } from '../services/AuthServices'
+import { useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth'
+import * as services from '../services/workServices';
+import * as servicesCompany from '../services/servicesCompany';
 
 export const WorkContext = React.createContext({})
 
@@ -19,6 +22,8 @@ function Works(props) {
     const [filterResults, setFilterResults] = useState([]);
     const [workId, setWorkId] = useState('');
     const [sortBy, setSortBy] = useState('COMPANY_DESC');
+    const [user, error, loading] = useAuthState(auth);
+    const navigate = useNavigate();
     const value = useMemo(() => (
         {
             workId, setWorkId
@@ -94,12 +99,16 @@ function Works(props) {
     }
 
     useEffect(() => {
+        if (!user) {
+            navigate('/')
+        }
         services.getAllWorks(works => setWorks(works), sortBy);
+        servicesCompany.getAllCompanies(companies => setCompanies(companies));
     }, [sortBy])
 
-    useEffect(() => {
-        servicesCompany.getAllCompanies(companies => setCompanies(companies));
-    }, [])
+    // useEffect(() => {
+    //     servicesCompany.getAllCompanies(companies => setCompanies(companies));
+    // }, [])
 
     return (
         <>

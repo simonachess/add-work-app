@@ -1,4 +1,4 @@
-import firebase from "./firebase";
+import firebase from "../firebaseConfig";
 
 const SORT_OPTIONS = {
     "COMPANY_ASC": {

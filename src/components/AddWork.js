@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { FloatingLabel } from "react-bootstrap";
 import Companies from "./Companies";
 import Services from "./Services";
-import * as services from '../services';
+import * as services from '../services/workServices';
 
 function AddWork(props) {
 

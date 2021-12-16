@@ -1,6 +1,6 @@
 import { Table } from "react-bootstrap";
 import CompanyInfo from './CompanyInfo';
-import * as servicesCompany from '../servicesCompany'
+import * as servicesCompany from '../services/servicesCompany'
 
 function CompaniesList(props) {
 

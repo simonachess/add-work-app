@@ -1,6 +1,6 @@
 import { Table, Button } from "react-bootstrap";
 import Work from './Work';
-import * as services from '../services'
+import * as services from '../services/workServices'
 
 function WorksTable(props) {
 

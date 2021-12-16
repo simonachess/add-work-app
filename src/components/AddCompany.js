@@ -62,7 +62,7 @@ function AddCompany(props) {
                         <FloatingLabel label="Email"></FloatingLabel>
                         <Form.Control
                             name="email"
-                            type="text"
+                            type="email"
                             placeholder="some@bo.dy"
                             defaultValue={companyInfo.email}
                             onChange={handleChange} />
