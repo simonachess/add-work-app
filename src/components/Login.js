@@ -1,18 +1,26 @@
 import { Form, Button } from 'react-bootstrap';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { auth, signIn } from '../services/AuthServices';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [user, error, loading] = useAuthState(auth);
+    const navigate = useNavigate();
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(email, password)
+        signIn(email, password);
+        // console.log(email, password)
     }
 
+    useEffect(() => {
+        if (loading) return
+        if (user) navigate('/works')
+    }, [user, loading])
 
     return (
         <>

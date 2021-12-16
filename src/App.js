@@ -6,7 +6,8 @@ import Works from './components/Works';
 import WorkById from './components/WorkById';
 import Header from './components/Header';
 import { Alert } from "react-bootstrap";
-import Register from './components/Register'
+import Register from './components/Register';
+import Login from './components/Login'
 
 function App() {
 
@@ -32,7 +33,8 @@ function App() {
         {(message) ? <Alert variant="success">
           {message}</Alert> : ''}
         <Routes>
-          <Route exact path="/" element={<Register />} />
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
           <Route exact path="/works" element={<Works status={setMessageHandler} />} />
           <Route path="work/:id" element={<WorkById />} />
         </Routes>

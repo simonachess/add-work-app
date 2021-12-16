@@ -22,7 +22,6 @@ const Register = () => {
         e.preventDefault();
         if (!userName) {
             alert('Enter name');
-
         }
         register(userName, email, password);
     }
