@@ -26,7 +26,7 @@ function Filter(props) {
         <Card>
             <Card.Header>Filter</Card.Header>
             <Form className="d-flex flex-direction-row">
-                <Card.Body>
+                <Card.Body >
                     <Form.Group>
                         <FloatingLabel label="Choose enterprise"></FloatingLabel>
                         <Form.Select
@@ -38,9 +38,10 @@ function Filter(props) {
                             <Companies companies={props.companies} />
                         </Form.Select>
                     </Form.Group>
-                </Card.Body>
+                </Card.Body >
+
                 <Card.Body>
-                    <Form.Group >
+                    <Form.Group>
                         <FloatingLabel label="Choose service"> </FloatingLabel>
                         <Form.Select
                             name="service"

@@ -19,7 +19,7 @@ function Work(props) {
     }
 
     const getIDhandler = () => {
-        console.log(props.id)
+
         props.delete(props.id)
     }
 

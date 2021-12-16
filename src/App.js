@@ -16,7 +16,7 @@ function App() {
     if (status) {
       setMessage('successfully added')
     }
-    console.log(status)
+
   }
 
   useEffect(() => {

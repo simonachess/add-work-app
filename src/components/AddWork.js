@@ -6,7 +6,6 @@ import Companies from "./Companies";
 import Services from "./Services";
 import * as services from '../services';
 
-
 function AddWork(props) {
 
     const [items, setItems] = useState({
@@ -37,7 +36,8 @@ function AddWork(props) {
     const updateHandler = () => {
         props.onUpdateWorkHandler(props.update, items)
     }
-    console.log('AddWork failas', props.companies)
+
+
     return (
         <Card>
             <Card.Header>Add work</Card.Header>
@@ -98,7 +98,7 @@ function AddWork(props) {
                     {(props.update) ?
                         <>
                             <Button variant="primary" type="button" onClick={updateHandler}>Update</Button>
-                            {/* <Button variant="primary" type="button" onClick={props.setWorkId('')}>Cancel</Button> */}
+                            <Button variant="danger" className="ml-2" type="button" onClick={props.closeWorkHandler}>Cancel</Button>
                         </>
                         :
                         <Button variant="primary" type="submit">Save</Button>

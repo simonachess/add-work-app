@@ -9,6 +9,8 @@ function AddCompany(props) {
         title: '',
         name: '',
         address: '',
+        tel: '',
+        email: '',
     })
 
     const handleChange = (e) => {
@@ -21,7 +23,7 @@ function AddCompany(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         props.setCompany(companyInfo);
-        console.log(companyInfo)
+
     }
 
     return (
@@ -30,21 +32,21 @@ function AddCompany(props) {
             <Card.Body>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
-                        <FloatingLabel label="Head of company"></FloatingLabel>
+                        <FloatingLabel label="Company name"></FloatingLabel>
                         <Form.Control
                             name="name"
                             type="text"
-                            placeholder="Name, Last name"
-                            defaultValue={companyInfo.name}
+                            placeholder="Company name"
+                            defaultValue={companyInfo.title}
                             onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <FloatingLabel label="Company name"></FloatingLabel>
+                        <FloatingLabel label="Head of company"></FloatingLabel>
                         <Form.Control
                             name="title"
                             type="text"
-                            placeholder="Company name"
-                            defaultValue={companyInfo.title}
+                            placeholder="Name, Last name"
+                            defaultValue={companyInfo.name}
                             onChange={handleChange} />
                     </Form.Group>
                     <Form.Group className="mb-3">
@@ -54,6 +56,24 @@ function AddCompany(props) {
                             type="text"
                             placeholder="Adress"
                             defaultValue={companyInfo.address}
+                            onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <FloatingLabel label="Email"></FloatingLabel>
+                        <Form.Control
+                            name="email"
+                            type="text"
+                            placeholder="some@bo.dy"
+                            defaultValue={companyInfo.email}
+                            onChange={handleChange} />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <FloatingLabel label="Phone"></FloatingLabel>
+                        <Form.Control
+                            name="tel"
+                            type="text"
+                            placeholder="+37061122222"
+                            defaultValue={companyInfo.tel}
                             onChange={handleChange} />
                     </Form.Group>
                     <Button variant="primary" type="submit">Save</Button>

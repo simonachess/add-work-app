@@ -13,6 +13,8 @@ function CompanyInfo(props) {
             <td>aa{props.title}</td>
             <td>aa{props.name}</td>
             <td>aa{props.address}</td>
+            <td>aa{props.email}</td>
+            <td>aa{props.tel}</td>
             <td><a href="#/" onClick={getIDCompanyhandler}>Delete</a></td>
         </tr>
     )

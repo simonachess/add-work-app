@@ -11,7 +11,7 @@ function WorkById() {
     useEffect(() => {
         services.showById(item => setWork(item), id)
     }, [])
-    console.log(work)
+
     return (
         <Card>
             <Card.Header>

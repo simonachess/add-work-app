@@ -15,6 +15,8 @@ function CompaniesList(props) {
                     <th>Company title</th>
                     <th>Head of Company</th>
                     <th>Address</th>
+                    <th>Email</th>
+                    <th>Phone</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -27,6 +29,8 @@ function CompaniesList(props) {
                             title={company.title}
                             name={company.name}
                             address={company.address}
+                            tel={company.tel}
+                            email={company.email}
                             delete={deleteCompanyHandler} />)
                 }))}
             </tbody>

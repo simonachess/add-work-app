@@ -19,7 +19,6 @@ function Works(props) {
     const [filterResults, setFilterResults] = useState([]);
     const [workId, setWorkId] = useState('');
     const [sortBy, setSortBy] = useState('COMPANY_DESC');
-    // const [sortServiceBy, setSortServicetBy] = useState('SERVICE_DESC');
     const value = useMemo(() => (
         {
             workId, setWorkId
@@ -132,9 +131,9 @@ function Works(props) {
                             Companies list
                         </Button>
                     )} </Card.Header>
-                {companiesList && <Card.Body> <CompaniesList companies={companies} /></Card.Body>}
                 {addCompany && <Card.Body className="d-flex justify-content-center">  <AddCompany setCompany={handleAddCompany} /></Card.Body>}
-                {(addWork || workId) && <Card.Body className="w-50">  <AddWork companies={companies} setWorks={handleAddWork} update={workId} onUpdateWorkHandler={onUpdateWorkHandler} /></Card.Body>}
+                {companiesList && <Card.Body> <CompaniesList companies={companies} /></Card.Body>}
+                {(addWork || workId) && <Card.Body className="w-50">  <AddWork companies={companies} closeWorkHandler={closeWorkHandler} setWorks={handleAddWork} update={workId} onUpdateWorkHandler={onUpdateWorkHandler} /></Card.Body>}
                 <Card.Header>
                     <Filter filterCriteria={handleFilter} companies={companies} />
                 </Card.Header>
