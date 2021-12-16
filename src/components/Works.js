@@ -32,6 +32,7 @@ function Works(props) {
 
     function closeWorkHandler() {
         setAddWork(false);
+        setWorkId('')
     }
 
     const handleAddWork = (data) => {
