@@ -9,7 +9,6 @@ const Register = () => {
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    console.log(userName, email, password);
     const [user, error, loading] = useAuthState(auth); //auth, kad galetume tikrinti busenas
     const navigate = useNavigate();
 

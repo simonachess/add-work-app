@@ -102,9 +102,9 @@ function Works(props) {
         if (!user) {
             navigate('/')
         }
-        services.getAllWorks(works => setWorks(works), sortBy);
+        user && services.getAllWorks(works => setWorks(works), sortBy, user);
         servicesCompany.getAllCompanies(companies => setCompanies(companies));
-    }, [sortBy])
+    }, [sortBy, user])
 
     // useEffect(() => {
     //     servicesCompany.getAllCompanies(companies => setCompanies(companies));

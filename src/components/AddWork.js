@@ -5,8 +5,12 @@ import { FloatingLabel } from "react-bootstrap";
 import Companies from "./Companies";
 import Services from "./Services";
 import * as services from '../services/workServices';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../services/AuthServices';
 
 function AddWork(props) {
+
+    const [user, loading, error] = useAuthState(auth);
 
     const [items, setItems] = useState({
         date: '',
@@ -14,12 +18,20 @@ function AddWork(props) {
         service: '',
         description: '',
         startTime: '',
-        endTime: ''
+        endTime: '',
     })
 
     useEffect(() => {
-        props.update && services.showById(item => setItems(item), props.update)
-    }, [props.update])
+        props.update && services.showById(item => setItems(item), props.update);
+        if (user) {
+            setItems({
+                ...items,
+                uid: user.uid //pridedami userio id kai pridedame darba
+            })
+        }
+    }, [props.update, user])
+
+    console.log(items)
 
     const handleChange = (e) => {
         setItems({

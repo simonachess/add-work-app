@@ -8,6 +8,7 @@ import Header from './components/Header';
 import { Alert } from "react-bootstrap";
 import Register from './components/Register';
 import Login from './components/Login'
+import Reset from './components/Reset'
 
 function App() {
 
@@ -17,7 +18,6 @@ function App() {
     if (status) {
       setMessage('successfully added')
     }
-
   }
 
   useEffect(() => {
@@ -35,6 +35,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
+          <Route exact path="/reset" element={<Reset />} />
           <Route exact path="/works" element={<Works status={setMessageHandler} />} />
           <Route path="work/:id" element={<WorkById />} />
         </Routes>

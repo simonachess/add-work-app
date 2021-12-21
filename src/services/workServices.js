@@ -19,10 +19,11 @@ const SORT_OPTIONS = {
     },
 }
 
-export const getAllWorks = (onWorkChanged, sortBy) => {
+export const getAllWorks = (onWorkChanged, sortBy, user) => {
     firebase
         .firestore()
         .collection('timetable')
+        .where('uid', '==', user?.uid)
         .orderBy(SORT_OPTIONS[sortBy].column, SORT_OPTIONS[sortBy].direction)
         .onSnapshot((snapshot) => {
             const newWork = snapshot.docs.map(doc => ({

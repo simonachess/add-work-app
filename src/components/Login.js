@@ -14,7 +14,6 @@ const Login = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         signIn(email, password);
-        // console.log(email, password)
     }
 
     useEffect(() => {
