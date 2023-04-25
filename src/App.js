@@ -1,12 +1,12 @@
 
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import './App.css';
-import Works from './components/Works';
-import WorkById from './components/WorkById';
-import Header from './components/Header';
-import { Alert } from "react-bootstrap";
-import Register from './components/Register';
+import Works from './components/Works'
+import WorkById from './components/WorkById'
+import Header from './components/Header'
+import { Alert } from "react-bootstrap"
+import Register from './components/Register'
 import Login from './components/Login'
 import Reset from './components/Reset'
 
@@ -22,9 +22,9 @@ function App() {
 
   useEffect(() => {
     setTimeout(() => {
-      setMessage('');
+      setMessage('')
     }, 3000);
-  }, [message]);
+  }, [message])
 
   return (
     <div className="container">
@@ -37,7 +37,7 @@ function App() {
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/reset" element={<Reset />} />
           <Route exact path="/works" element={<Works status={setMessageHandler} />} />
-          <Route path="work/:id" element={<WorkById />} />
+          <Route path="works/work/:id" element={<WorkById />} />
         </Routes>
       </Router>
     </div>

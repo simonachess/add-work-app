@@ -1,16 +1,16 @@
-import { Form, Button } from 'react-bootstrap';
-import React, { useState, useEffect } from 'react';
+import { Form, Button } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
 import { register, auth } from '../services/AuthServices'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 const Register = () => {
 
-    const [userName, setUserName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [userName, setUserName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [user, error, loading] = useAuthState(auth); //auth, kad galetume tikrinti busenas
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (loading) return;

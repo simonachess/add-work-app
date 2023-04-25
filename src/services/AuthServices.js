@@ -1,4 +1,4 @@
-import firebase, { app } from '../firebaseConfig';
+import firebase, { app } from './firebaseConfig';
 
 
 const auth = app.auth();

@@ -1,4 +1,4 @@
-import firebase from "../firebaseConfig";
+import firebase from "./firebaseConfig";
 
 const SORT_OPTIONS = {
     "COMPANY_ASC": {
@@ -42,12 +42,15 @@ export const addWork = (data) => {
 }
 
 export const showById = (item, id) => {
+    console.log('byid')
     firebase
         .firestore()
         .collection('timetable')
         .doc(id)
         .get()
-        .then((docRef) => { item(docRef.data()) })
+        .then((docRef) => {
+            console.log('docRef',docRef)
+            item(docRef.data()) })
 
 }
 

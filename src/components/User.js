@@ -15,7 +15,7 @@ const User = () => {
         if (loading) return
         if (!user) navigate('/')
         userServices.getUserData(user, setUserData)
-    }, [user, loading, userData])
+    }, [user, loading])
 
     return (
         <>

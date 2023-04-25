@@ -1,7 +1,7 @@
-import { Card, Form, FloatingLabel, Button } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
-import Services from "./Services";
-import Companies from "./Companies";
+import { Card, Form, FloatingLabel, Button } from "react-bootstrap"
+import React, { useEffect, useState } from "react"
+import Services from "./Services"
+import Companies from "./Companies"
 
 function Filter(props) {
 

@@ -1,15 +1,15 @@
-import { Form, Button } from 'react-bootstrap';
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { auth, signIn } from '../services/AuthServices';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { Form, Button } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { auth, signIn } from '../services/AuthServices'
+import { useAuthState } from 'react-firebase-hooks/auth'
 
 const Login = () => {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [user, error, loading] = useAuthState(auth);
-    const navigate = useNavigate();
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [user, error, loading] = useAuthState(auth)
+    const navigate = useNavigate()
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -23,7 +23,7 @@ const Login = () => {
 
     return (
         <>
-            <h2 className='mt-3 text-center'>Login</h2>
+            <h2 className='my-3 text-center'>Login</h2>
             <Form className='mx-auto col-sm-6' onSubmit={submitHandler}>
                 <Form.Group className='mb-3'>
                     <Form.Control
@@ -44,7 +44,7 @@ const Login = () => {
                 <Button variant="primary" type='submit'>
                     Login
                 </Button>
-                <ul>
+                <ul className="mt-4">
                     <li>Don't have account? <Link to='/register'>Register</Link></li>
                     <li>Forgot password? <Link to='/reset'>Reset password</Link></li>
                 </ul>

@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
-import { auth, resetPassword } from '../services/AuthServices';
+import React, { useState } from 'react'
+import { Form, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+// import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom'
+import { resetPassword } from '../services/AuthServices'
 
 const Reset = () => {
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState()
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (!email) {
-            alert('Enter email');
+            alert('Enter email')
         } else {
-            resetPassword(email);
-            navigate('/login');
+            resetPassword(email)
+            navigate('/login')
         }
 
     }

@@ -1,13 +1,17 @@
-import firebase from '../firebaseConfig';
+import firebase from './firebaseConfig';
 
 export const getUserData = (user, setUser) => {
+
     try {
+        console.log(user)
         firebase
             .firestore()
             .collection('users')
-            .where('uid', '==', user?.uid)
+            .where('uid', '==', user?.uid || '')
             .get()
-            .then((userData) => { setUser(userData.docs[0].data()) })
+            .then(console.log('user',user))
+            .then(() => { setUser(user.providerData[0]) })
+            // .then((userData) => setUser(userData) )
     }
     catch (error) {
         console.log(error)
