@@ -1,5 +1,5 @@
 function Service({ id, title }) {
-    return <option value={id}>{title}</option>;
+    return <option value={id}>{title}</option>
 }
 
-export default Service;
+export default Service

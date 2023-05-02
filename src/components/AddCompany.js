@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Card, Form } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import { FloatingLabel } from "react-bootstrap";
+import { useState } from 'react'
+import { Card, Form } from "react-bootstrap"
+import { Button } from "react-bootstrap"
+import { FloatingLabel } from "react-bootstrap"
 
 function AddCompany(props) {
 

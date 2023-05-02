@@ -1,15 +1,15 @@
-import firebase, { app } from './firebaseConfig';
+import firebase, { app } from './firebaseConfig'
 
 
-const auth = app.auth();
+const auth = app.auth()
 
-const db = app.firestore();
+const db = app.firestore()
 
 const register = async (name, email, password) => {
     try {
-        //naudojame async await nes laukiamia kol google sukurs useri
-        const result = await auth.createUserWithEmailAndPassword(email, password);
-        const user = result.user;
+        //waiting while user will be created
+        const result = await auth.createUserWithEmailAndPassword(email, password)
+        const user = result.user
         await db.collection('users')
             .add({
                 uid: user.uid,
@@ -24,7 +24,7 @@ const register = async (name, email, password) => {
 }
 
 const logout = () => {
-    auth.signOut();
+    auth.signOut()
 }
 
 const signIn = async (email, password) => {
@@ -38,7 +38,7 @@ const signIn = async (email, password) => {
 
 const resetPassword = async (email) => {
     try {
-        await auth.sendPasswordResetEmail(email);
+        await auth.sendPasswordResetEmail(email)
         alert('Link to reset password was sent to your email')
     }
     catch (error) {

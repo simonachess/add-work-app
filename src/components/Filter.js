@@ -61,7 +61,7 @@ function Filter(props) {
                 </Card.Body>
             </Form>
         </Card>
-    );
+    )
 }
 
-export default Filter;
+export default Filter

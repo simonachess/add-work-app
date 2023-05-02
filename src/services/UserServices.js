@@ -1,4 +1,4 @@
-import firebase from './firebaseConfig';
+import firebase from './firebaseConfig'
 
 export const getUserData = (user, setUser) => {
 

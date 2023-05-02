@@ -128,7 +128,7 @@ function AddWork(props) {
                 </Form>
             </Card.Body>
         </Card >
-    );
+    )
 }
 
-export default AddWork;
+export default AddWork

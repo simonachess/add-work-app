@@ -13,4 +13,4 @@ const companies = [
     }
 ]
 
-export default companies;
+export default companies

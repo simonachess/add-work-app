@@ -9,7 +9,7 @@ const Register = () => {
     const [userName, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [user, error, loading] = useAuthState(auth); //auth, kad galetume tikrinti busenas
+    const [user, loading] = useAuthState(auth)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -18,14 +18,12 @@ const Register = () => {
     }, [user, loading])
 
     const submitHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         if (!userName) {
-            alert('Enter name');
+            alert('Enter name')
         }
-        register(userName, email, password);
+        register(userName, email, password)
     }
-
-
 
     return (
         <>
@@ -64,4 +62,4 @@ const Register = () => {
     )
 }
 
-export default Register;
+export default Register

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-// import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom'
 import { resetPassword } from '../services/AuthServices'
 

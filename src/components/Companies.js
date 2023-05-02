@@ -1,4 +1,4 @@
-import Company from "./Company";
+import Company from "./Company"
 
 function Companies(props) {
     const allCompanies = props.companies

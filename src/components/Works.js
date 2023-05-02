@@ -82,11 +82,8 @@ function Works(props) {
             navigate('/')
         }
         user && services.getAllWorks(works => setWorks(works), sortBy, user)
+        user && servicesCompany.getAllCompanies(companies => setCompanies(companies))
     }, [sortBy, user])
-
-    useEffect(() => {
-        servicesCompany.getAllCompanies(companies => setCompanies(companies))
-    }, [])
 
     return (
         <>
@@ -183,4 +180,4 @@ function Works(props) {
     )
 }
 
-export default Works;
+export default Works

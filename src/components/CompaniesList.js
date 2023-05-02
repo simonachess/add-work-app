@@ -7,7 +7,7 @@ function CompaniesList(props) {
     const deleteCompanyHandler = (idCompany) => {
         servicesCompany.deleteCompany(idCompany)
     }
-console.log(props.companies)
+
     return (
         <>
         { props.companies.length
@@ -45,4 +45,4 @@ console.log(props.companies)
     )
 }
 
-export default CompaniesList;
+export default CompaniesList
