@@ -14,11 +14,8 @@ import * as servicesCompany from '../services/servicesCompany'
 export const WorkContext = React.createContext({})
 
 function Works(props) {
-    const [addWork, setAddWork] = useState(false)
-    const [addCompany, setAddCompany] = useState(false)
     const [works, setWorks] = useState([])
     const [companies, setCompanies] = useState([])
-    const [companiesList, setCompaniesList] = useState(false)
     const [filterResults, setFilterResults] = useState([])
     const [workId, setWorkId] = useState('')
     const [sortBy, setSortBy] = useState('COMPANY_DESC')
@@ -33,14 +30,12 @@ function Works(props) {
         }
     ), [workId])
 
-
     function addWorkHandler() {
         setShowAddWorkModal(true)
-        setAddWork(true)
     }
 
     function closeWorkHandler() {
-        setAddWork(false)
+        setShowAddWorkModal(false)
         setWorkId('')
     }
 
@@ -48,20 +43,11 @@ function Works(props) {
         services.addWork(data)
         props.status(true)
     }
-    const addCompanyHandler = () => {
-        setAddCompany(true)
-        setShowAddCompanyModal(true)
-    }
 
     const handleAddCompany = (comanpies) => {
         servicesCompany.addCompany(comanpies)
         setShowAddCompanyModal(true)
         props.status(true)
-    }
-
-    const showCompaniesList = () => {
-        setCompaniesList(true)
-        setShowCompaniesListModal(true)
     }
 
     const handleFilter = (criteria) => {
@@ -99,7 +85,7 @@ function Works(props) {
     }, [sortBy, user])
 
     useEffect(() => {
-       servicesCompany.getAllCompanies((companies)=>console.log(companies))
+        servicesCompany.getAllCompanies(companies => setCompanies(companies))
     }, [])
 
     return (
@@ -109,14 +95,14 @@ function Works(props) {
                     <Button className="btn btn-primary" onClick={addWorkHandler}>
                         Add Work
                     </Button>
-                    <Button className="btn btn-primary" onClick={addCompanyHandler}>
+                    <Button className="btn btn-primary" onClick={() => setShowAddCompanyModal(true)}>
                         Add Company
                     </Button>
-                    <Button className="btn btn-primary" onClick={showCompaniesList}>
+                    <Button className="btn btn-primary" onClick={() => setShowCompaniesListModal(true)}>
                         Companies list
                     </Button>
                 </Card.Header>
-                {addCompany && showAddCompanyModal &&
+                { showAddCompanyModal &&
                     <Modal
                         show={showAddCompanyModal}
                         onHide={() => setShowAddCompanyModal(false)}
@@ -136,7 +122,7 @@ function Works(props) {
                         </Modal.Body>
                     </Modal>
                 }
-                {companiesList && showCompaniesListModal &&
+                { showCompaniesListModal &&
                     <Modal
                         show={showCompaniesListModal}
                         onHide={() => setShowCompaniesListModal(false)}
@@ -154,7 +140,7 @@ function Works(props) {
                         </Modal.Body>
                     </Modal>
                 }
-                {addWork && showAddWorkModal &&
+                { showAddWorkModal &&
                     <Modal
                         show={showAddWorkModal}
                         onHide={() => setShowAddWorkModal(false)}
@@ -179,7 +165,6 @@ function Works(props) {
                 <Card.Header>
                     <Filter filterCriteria={handleFilter} companies={companies} />
                 </Card.Header>
-
                 <Card.Header>
                     <h3>List of works</h3>
                 </Card.Header>
@@ -193,7 +178,6 @@ function Works(props) {
                         />
                     </WorkContext.Provider>
                 </Card.Body>
-
             </Card>
         </>
     )

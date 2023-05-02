@@ -21,10 +21,14 @@ function Filter(props) {
     useEffect(() => {
         props.filterCriteria(filter)
     }, [filter])
-
+console.log(filter)
     return (
         <Card>
-            <Card.Header>Filter</Card.Header>
+            <Card.Header className="d-flex justify-content-between align-items-center">Filter
+                <Button variant="primary" type="reset" onClick={resetFilter} disabled={Object.keys(filter).length === 0}>
+                    Clear filter
+                </Button>
+            </Card.Header>
             <Form className="d-flex flex-direction-row">
                 <Card.Body >
                     <Form.Group>
@@ -32,8 +36,10 @@ function Filter(props) {
                         <Form.Select
                             name="company"
                             style={{ width: "100%" }}
-                            onChange={handleFilter}>
-                            <option>....</option>
+                            onChange={handleFilter}
+                            value={filter.company}
+                        >
+                            <option value={filter.company} label={filter.company}>....</option>
                             <Companies companies={props.companies} />
                         </Form.Select>
                     </Form.Group>
@@ -45,15 +51,13 @@ function Filter(props) {
                         <Form.Select
                             name="service"
                             style={{ width: "100%" }}
-                            onChange={handleFilter}>
-                            <option>....</option>
+                            onChange={handleFilter}
+                            value={filter.service}
+                        >
+                            <option value={filter.service} lable={filter.service}>....</option>
                             <Services />
                         </Form.Select>
                     </Form.Group>
-                    {
-                        (Object.keys(filter).length !== 0) &&
-                        <Button variant="primary" type="reset" onClick={resetFilter}>Reset</Button>
-                    }
                 </Card.Body>
             </Form>
         </Card>

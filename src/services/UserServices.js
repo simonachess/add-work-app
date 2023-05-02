@@ -11,7 +11,6 @@ export const getUserData = (user, setUser) => {
             .get()
             .then(console.log('user',user))
             .then(() => { setUser(user.providerData[0]) })
-            // .then((userData) => setUser(userData) )
     }
     catch (error) {
         console.log(error)

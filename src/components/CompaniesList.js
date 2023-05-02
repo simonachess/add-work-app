@@ -1,13 +1,13 @@
-import { Table } from "react-bootstrap";
-import CompanyInfo from './CompanyInfo';
+import { Table } from "react-bootstrap"
+import CompanyInfo from './CompanyInfo'
 import * as servicesCompany from '../services/servicesCompany'
 
 function CompaniesList(props) {
 
     const deleteCompanyHandler = (idCompany) => {
-        servicesCompany.deleteCompany(idCompany);
+        servicesCompany.deleteCompany(idCompany)
     }
-
+console.log(props.companies)
     return (
         <>
         { props.companies.length
