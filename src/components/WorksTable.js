@@ -37,15 +37,7 @@ function WorksTable(props) {
                                 Sort ↑ ↓
                             </Button>
                         </th>
-                        <th className="align-middle">Service
-                            <Button
-                                variant="light"
-                                className="ml-2"
-                                onClick={props.handleSortService}
-                            >
-                                Sort ↑ ↓
-                            </Button>
-                        </th>
+                        <th className="align-middle">Service</th>
                         <th className="align-middle">Started</th>
                         <th className="align-middle">Ended</th>
                         <th className="align-middle">Duration</th>

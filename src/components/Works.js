@@ -68,15 +68,6 @@ function Works(props) {
         }
     }
 
-    const handleSortService = () => {
-        if (sortBy === 'SERVICE_ASC') {
-            setSortBy('SERVICE_DESC')
-        }
-        else {
-            setSortBy('SERVICE_ASC')
-        }
-    }
-
     useEffect(() => {
         if (!user) {
             navigate('/')
@@ -169,7 +160,6 @@ function Works(props) {
                     <WorkContext.Provider value={value}>
                         <WorksTable
                             handleSortCompany={handleSortCompany}
-                            handleSortService={handleSortService}
                             sortBy={sortBy}
                             data={filterResults.length ? filterResults : works}
                         />
