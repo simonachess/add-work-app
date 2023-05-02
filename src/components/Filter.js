@@ -21,7 +21,7 @@ function Filter(props) {
     useEffect(() => {
         props.filterCriteria(filter)
     }, [filter])
-console.log(filter)
+
     return (
         <Card>
             <Card.Header className="d-flex justify-content-between align-items-center">Filter
