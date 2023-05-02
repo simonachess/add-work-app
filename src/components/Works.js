@@ -22,7 +22,7 @@ function Works(props) {
     const [filterResults, setFilterResults] = useState([])
     const [workId, setWorkId] = useState('')
     const [sortBy, setSortBy] = useState('COMPANY_DESC')
-    const [user, error, loading] = useAuthState(auth)
+    const [user] = useAuthState(auth)
     const [showAddWorkModal, setShowAddWorkModal] = useState(false)
     const [showAddCompanyModal, setShowAddCompanyModal] = useState(false)
     const [showCompaniesListModal, setShowCompaniesListModal] = useState(false)
@@ -63,15 +63,6 @@ function Works(props) {
         setCompaniesList(true)
         setShowCompaniesListModal(true)
     }
-    // const closeCompaniesList = () => {
-    //     setCompaniesList(false)
-    // }
-
-    //apkeist
-    const onUpdateWorkHandler = (id, data) => {
-        services.updateWork(id, data)
-        setWorkId('')
-    }
 
     const handleFilter = (criteria) => {
         const filteredItems = works.filter(item => {
@@ -105,14 +96,11 @@ function Works(props) {
             navigate('/')
         }
         user && services.getAllWorks(works => setWorks(works), sortBy, user)
-        // servicesCompany.getAllCompanies(companies => setCompanies(companies))
     }, [sortBy, user])
 
     useEffect(() => {
-        if(user) {
-        servicesCompany.getAllCompanies(companies => setCompanies(companies))
-        }
-    }, [user])
+       servicesCompany.getAllCompanies((companies)=>console.log(companies))
+    }, [])
 
     return (
         <>
@@ -133,12 +121,12 @@ function Works(props) {
                         show={showAddCompanyModal}
                         onHide={() => setShowAddCompanyModal(false)}
                         dialogClassName="modal-90w"
-                        aria-labelledby="example-custom-modal-styling-title"
                     >
-                        <Modal.Header closeButton>
+                        <Modal.Header>
                             <Modal.Title id="example-custom-modal-styling-title">
                                 Add work
                             </Modal.Title>
+                            <span className="close-btn" onClick={() => setShowAddCompanyModal(false)}>X</span>
                         </Modal.Header>
                         <Modal.Body>
                             <AddCompany
@@ -147,54 +135,46 @@ function Works(props) {
                             />
                         </Modal.Body>
                     </Modal>
-                // <Card.Body className="d-flex justify-content-center">  <AddCompany setCompany={handleAddCompany} /></Card.Body>
                 }
                 {companiesList && showCompaniesListModal &&
                     <Modal
                         show={showCompaniesListModal}
                         onHide={() => setShowCompaniesListModal(false)}
                         dialogClassName="modal-90w"
-                        aria-labelledby="example-custom-modal-styling-title"
                         size="xl"
                     >
-                        <Modal.Header closeButton>
+                        <Modal.Header>
                             <Modal.Title id="example-custom-modal-styling-title">
                                 Companies List
                             </Modal.Title>
+                            <span className="close-btn" onClick={() => setShowCompaniesListModal(false)}>X</span>
                         </Modal.Header>
                         <Modal.Body>
                             <CompaniesList companies={companies} />
                         </Modal.Body>
                     </Modal>
-                // <Card.Body> <CompaniesList companies={companies} /></Card.Body>
                 }
-                {(addWork || workId) && showAddWorkModal &&
+                {addWork && showAddWorkModal &&
                     <Modal
                         show={showAddWorkModal}
                         onHide={() => setShowAddWorkModal(false)}
                         dialogClassName="modal-90w"
-                        aria-labelledby="example-custom-modal-styling-title"
-                        >
-                        <Modal.Header closeButton>
+                    >
+                        <Modal.Header>
                             <Modal.Title id="example-custom-modal-styling-title">
                             Add work
                             </Modal.Title>
+                            <span className="close-btn" onClick={() => setShowAddWorkModal(false)}>X</span>
                         </Modal.Header>
                         <Modal.Body>
                             <AddWork
                                 companies={companies}
                                 closeWorkHandler={closeWorkHandler}
                                 setWorks={handleAddWork}
-                                update={workId}
-                                onUpdateWorkHandler={onUpdateWorkHandler}
                                 setShowAddWorkModal={setShowAddWorkModal}
                             />
                         </Modal.Body>
                     </Modal>
-                // <Card.Body className="w-50 mx-auto">
-                //     <AddWork companies={companies} closeWorkHandler={closeWorkHandler} setWorks={handleAddWork} update={workId} onUpdateWorkHandler={onUpdateWorkHandler} />
-                // </Card.Body>
-
                 }
                 <Card.Header>
                     <Filter filterCriteria={handleFilter} companies={companies} />
@@ -216,7 +196,7 @@ function Works(props) {
 
             </Card>
         </>
-    );
+    )
 }
 
 export default Works;

@@ -10,7 +10,7 @@ import { auth } from '../services/AuthServices'
 
 function AddWork(props) {
 
-    const [user, loading, error] = useAuthState(auth)
+    const [user] = useAuthState(auth)
 
     const [items, setItems] = useState({
         date: '',
@@ -26,12 +26,10 @@ function AddWork(props) {
         if (user) {
             setItems({
                 ...items,
-                uid: user.uid //pridedami userio id kai pridedame darba
+                uid: user.uid //add user id when adding work
             })
         }
     }, [props.update, user])
-
-    console.log(items)
 
     const handleChange = (e) => {
         setItems({
@@ -50,7 +48,6 @@ function AddWork(props) {
         props.onUpdateWorkHandler(props.update, items)
     }
 
-console.log(items)
     return (
         <Card>
             <Card.Body>
@@ -69,21 +66,18 @@ console.log(items)
                         <Form.Select
                             value={items.company}
                             name="company"
-                            aria-label="Floating label select example"
                             style={{ width: "100%" }}
                             onChange={handleChange}
                             required
                         >
                             <option value="">....</option>
-                            <Companies companies={props.companies}
-                        />
+                            <Companies companies={props.companies} />
                         </Form.Select>
                     </Form.Group>
                     <Form.Group className="mb-3">
                         <FloatingLabel label="Choose service"></FloatingLabel>
                         <Form.Select value={items.service}
                             name="service"
-                            aria-label="Floating label select example"
                             style={{ width: "100%" }}
                             onChange={handleChange}
                             required
@@ -121,10 +115,12 @@ console.log(items)
                             required
                         />
                     </Form.Group>
-                    {(props.update) ?
+                    { props.update ?
                         <>
                             <Button variant="primary" type="button" onClick={updateHandler}>Update</Button>
-                            <Button variant="danger" className="ml-2" type="button" onClick={props.closeWorkHandler}>Cancel</Button>
+                            <Button variant="danger" className="ml-2" type="button" onClick={props.closeWorkHandler}>
+                                Cancel
+                            </Button>
                         </>
                         :
                         <Button variant="primary" type="submit">Save</Button>

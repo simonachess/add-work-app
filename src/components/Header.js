@@ -1,22 +1,17 @@
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { useAuthState } from "react-firebase-hooks/auth";
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { auth, logout } from '../services/AuthServices';
-import * as userServices from '../services/UserServices'
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
+import { useAuthState } from "react-firebase-hooks/auth"
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { auth, logout } from '../services/AuthServices'
 
 function Header() {
 
-    const [userData, setUserData] = useState([]);
-    const [user, error, loading] = useAuthState(auth);
-    const navigate = useNavigate();
-console.log(user)
+    const [user, loading] = useAuthState(auth)
+    const navigate = useNavigate()
+
     useEffect(() => {
         if (loading) return
         if (!user) navigate('/')
-        // userServices.getUserData(user, setUserData)
-        // setUserData(user.providerData[0])
-        // console.log(userData)
     }, [user, loading])
 
     return (
@@ -41,8 +36,8 @@ console.log(user)
                 </div>
             </Container>
         </Navbar>
-    );
+    )
 }
 
-export default Header;
+export default Header
 

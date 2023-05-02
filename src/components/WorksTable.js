@@ -1,13 +1,26 @@
-import { Table, Button } from "react-bootstrap";
-import Work from './Work';
+import { Table, Button } from "react-bootstrap"
+import Work from './Work'
 import * as services from '../services/workServices'
+import { useEffect, useState } from "react"
+import * as servicesCompany from '../services/servicesCompany'
 
 function WorksTable(props) {
 
+    const [companies, setCompanies] = useState([])
+    const [loading, setLoading] = useState(false)
+
     const deleteItemHandler = (id) => {
-        services.deleteWork(id);
+        services.deleteWork(id)
     }
-console.log(props.handleSortCompany)
+
+    useEffect(() => {
+        setLoading(true)
+        if(loading) {
+            servicesCompany.getAllCompanies(companies => setCompanies(companies))
+            setLoading(false)
+        }
+    }, [])
+
     return (
         <>
         { props.data.length ?
@@ -42,19 +55,18 @@ console.log(props.handleSortCompany)
                     </tr>
                 </thead>
                 <tbody>
-                    { (props.data.map((work, index) => {
-                        return (
-                            <Work
+                    { props.data.map((work, index) =>
+                        <Work
                                 id={work.id}
                                 key={index}
                                 date={work.date}
                                 company={work.company}
+                                companies={companies}
                                 service={work.service}
                                 startTime={work.startTime}
                                 endTime={work.endTime}
-                                delete={deleteItemHandler} />)
-                    }))
-                    }
+                                delete={deleteItemHandler} />
+                    )}
                 </tbody>
             </Table>
             :

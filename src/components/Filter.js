@@ -31,7 +31,6 @@ function Filter(props) {
                         <FloatingLabel label="Choose enterprise"></FloatingLabel>
                         <Form.Select
                             name="company"
-                            aria-label="Floating label select example"
                             style={{ width: "100%" }}
                             onChange={handleFilter}>
                             <option>....</option>
@@ -45,7 +44,6 @@ function Filter(props) {
                         <FloatingLabel label="Choose service"> </FloatingLabel>
                         <Form.Select
                             name="service"
-                            aria-label="Floating label select example"
                             style={{ width: "100%" }}
                             onChange={handleFilter}>
                             <option>....</option>
@@ -56,13 +54,8 @@ function Filter(props) {
                         (Object.keys(filter).length !== 0) &&
                         <Button variant="primary" type="reset" onClick={resetFilter}>Reset</Button>
                     }
-
-                    {/* <Button variant="primary" type="submit">
-                        Filter
-                    </Button> */}
                 </Card.Body>
             </Form>
-
         </Card>
     );
 }

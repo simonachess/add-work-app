@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
-import { WorkContext } from "./Works";
+import React, { useContext, useState } from "react"
+import { WorkContext } from "./Works"
 import { Link } from 'react-router-dom'
+import { Modal } from "react-bootstrap"
+import AddWork from "./AddWork"
+import * as services from '../services/workServices'
 
 function Work(props) {
 
     const { workId, setWorkId } = useContext(WorkContext)
+    const [showEditWorkModal, setShowEditWorkModal] = useState(false)
 
     const diff = (start, end) => {
         start = start.split(":");
@@ -25,6 +29,12 @@ function Work(props) {
 
     const getIdUpdateHandler = () => {
         setWorkId(props.id)
+        setShowEditWorkModal(true)
+    }
+
+    const onUpdateWorkHandler = (id, data) => {
+        services.updateWork(id, data)
+        setWorkId('')
     }
 
     return (
@@ -36,7 +46,31 @@ function Work(props) {
             <td>{props.endTime}</td>
             <td>{diff(props.startTime, props.endTime)}</td>
             <td><a href="#/" onClick={getIDhandler}>Delete</a></td>
-            <td><a href="#/" onClick={getIdUpdateHandler}>Edit</a></td>
+            <td><a href="#/" onClick={getIdUpdateHandler}>Edit</a>
+            { workId && showEditWorkModal &&
+                <Modal
+                    show={showEditWorkModal}
+                    onHide={() => setShowEditWorkModal(false)}
+                    dialogClassName="modal-90w"
+                >
+                    <Modal.Header>
+                        <Modal.Title>
+                        Add work
+                        </Modal.Title>
+                        <span className="close-btn" onClick={() => setShowEditWorkModal(false)}>X</span>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <AddWork
+                            companies={props.companies}
+                            closeWorkHandler={() => setShowEditWorkModal(false)}
+                            update={workId}
+                            onUpdateWorkHandler={onUpdateWorkHandler}
+                            setShowEditWorkModal={setShowEditWorkModal}
+                        />
+                    </Modal.Body>
+                </Modal>
+            }
+            </td>
             <td><Link key={props.id} to={`work/${props.id}`}>More...</Link></td>
         </tr>
     )

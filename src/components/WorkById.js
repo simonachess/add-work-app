@@ -4,15 +4,15 @@ import * as services from '../services/workServices'
 import { useParams } from 'react-router-dom'
 
 function WorkById() {
-console.log('byyyyyyy')
+
     const [work, setWork] = useState({})
     const { id } = useParams()
 
     useEffect(() => {
         services.showById(item => {
-            console.log('item',item); setWork(item)}, id)
+            setWork(item)}, id)
     }, [])
-// window.location.pathname
+
     return (
         <>
             <Card>
