@@ -21,7 +21,7 @@ function Filter(props) {
     useEffect(() => {
         props.filterCriteria(filter)
     }, [filter])
-
+console.log(filter)
     return (
         <Card>
             <Card.Header className="d-flex justify-content-between align-items-center">Filter
@@ -39,7 +39,7 @@ function Filter(props) {
                             onChange={handleFilter}
                             value={filter.company}
                         >
-                            <option value={filter.company} label={filter.company}>....</option>
+                            <option value="">...</option>
                             <Companies companies={props.companies} />
                         </Form.Select>
                     </Form.Group>
@@ -54,7 +54,7 @@ function Filter(props) {
                             onChange={handleFilter}
                             value={filter.service}
                         >
-                            <option value={filter.service} lable={filter.service}>....</option>
+                            <option value="">...</option>
                             <Services />
                         </Form.Select>
                     </Form.Group>

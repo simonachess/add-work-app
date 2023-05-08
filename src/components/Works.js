@@ -54,9 +54,9 @@ function Works(props) {
         const filteredItems = works.filter(item => {
             return Object.keys(criteria).every(filter => {
                 return criteria[filter] === item[filter]
-            });
-        });
-        setFilterResults(filteredItems);
+            })
+        })
+        setFilterResults(filteredItems)
     }
 
     const handleSortCompany = () => {
